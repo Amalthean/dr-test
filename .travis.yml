@@ -1,0 +1,10 @@
+language: generic
+sudo: required # set sudo permissions
+services:
+  - docker  # travis ci autmatically installs copy of docker into our running container
+
+before_install:
+  - docker build -t amalthean/dr-test -f Dockerfile.dev .
+
+script:
+  - docker run -e CI=true amalthean/dr-test npm run test -- --coverage
